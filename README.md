@@ -1,5 +1,9 @@
 Pay4Skill: An AI-Powered Resume Scorer and Recruitment Platform
 Author : Vamshi Krishna & Co-Author: Vamshi Sharath
+
+
+
+
 Introduction | Overview
 Recruitment in a skill-driven world demands innovative solutions. Pay4Skill is our answer - a platform designed to revolutionize the job market by leveraging Python, Flask, AI, and cloud technologies. The current phase focuses on empowering job seekers with a Resume Scorer, while the next phase will enhance the platform for recruiters, streamlining talent discovery and candidate management.
 Current Phase: Job Seeker Resume Scorer
