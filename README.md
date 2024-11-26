@@ -7,7 +7,6 @@ Recruitment in a skill-driven world demands innovative solutions. Pay4Skill is o
 Current Phase: Job Seeker Resume Scorer
 Our Resume Scorer enables job seekers to understand their skill strengths and improve their competitive edge.
 
-
 Features
 1. Seamless Google Login:
 Tool: Firebase Authentication.
@@ -62,9 +61,4 @@ Pay4Skill's roadmap includes:
  - Expanding the platform to support industry-specific skill assessments.
  - AI-Powered Insights: Adding predictive analytics for skill improvements and better hiring matches.
  - Mobile App Integration for on-the-go job searching and hiring management.
-Github Link: https://github.com/mvamshi92/pay4skill_jobseeker
-Call to action
-To learn more about Google Cloud services and to create impact for the work you do, get around to these steps right away:
-Register for Code Vipassana sessions
-Join the meetup group Datapreneur Social
-Sign up to become Google Cloud Innovator
+
