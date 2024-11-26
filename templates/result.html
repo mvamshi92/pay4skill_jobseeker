@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis Result</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f4f7fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .left-column, .right-column {
+            padding: 20px;
+        }
+        .left-column {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .right-column {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            font-weight: bold;
+        }
+        .preview-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .preview-btn:hover {
+            background-color: #0056b3;
+        }
+        .heat-index {
+            width: 100%;
+            height: 20px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #f44336, #ffeb3b, #4caf50);
+        }
+        .heat-index span {
+            display: block;
+            height: 100%;
+            border-radius: 5px;
+        }
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .row {
+            margin-bottom: 20px;
+        }
+        .col-md-6 {
+            margin-bottom: 20px;
+        }
+        .card-body {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Resume Analysis Header -->
+        <h1 class="text-center mb-4">Resume Analysis</h1>
+
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-6 left-column">
+                <!-- Resume URL -->
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Resume URL</div>
+                    <div class="card-body">
+                        <a href="{{ result.resumeurl }}" target="_blank" class="preview-btn">Preview Resume</a>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">Personal Information</div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> {{ result.name }}</p>
+                        <p><strong>Location:</strong> {{ result.location }}</p>
+                        <p><strong>Email:</strong> <a href="mailto:{{ result.email }}">{{ result.email }}</a></p>
+                        <p><strong>Phone:</strong> {{ result.phone or "N/A" }}</p>
+                    </div>
+                </div>
+
+                <!-- Overall Experience -->
+                <div class="card">
+                    <div class="card-header bg-info text-white">Overall Experience</div>
+                    <div class="card-body">
+                        <p><strong>Total Experience:</strong> {{ result.overallExperience }} years</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6 right-column">
+                <!-- Skills -->
+                <div class="card">
+                    <div class="card-header bg-success text-white">Skills</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for skill in result.skills %}
+                                <li class="list-group-item skill-item">
+                                    <div>
+                                        <strong>{{ skill.skill }}</strong>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="heat-index" style="width: 70%;">
+                                            <span style="width: {{ skill.rating * 10 }}%;"></span>
+                                        </div>
+                                        <span class="ms-3">{{ skill.rating }}/10</span>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Professional Experience -->
+                <div class="card">
+                    <div class="card-header bg-warning text-white">Professional/Project Experience</div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for exp in result.experience %}
+                                <li class="list-group-item">
+                                    <strong>Company:</strong> {{ exp.company }} - <strong>Experience:</strong> {{ exp.experience }} years
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="card">
+                    <div class="card-header bg-danger text-white">Certifications</div>
+                    <div class="card-body">
+                        <p><strong>Has Certification:</strong> 
+                            {% if result.hasCertification %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Education</div>
+                    <div class="card-body">
+                        <p><strong>Highest Qualification:</strong> {{ result.education }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay4Skill (Gen-AI Powered Hiring Platform)</title>
+
+    <!-- Firebase SDK as modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCCL0K9CT8rBGiQeS9SMFRRvm2ElV0OaM8",
+            authDomain: "pay4skill-2024.firebaseapp.com",
+            projectId: "pay4skill-2024",
+            storageBucket: "pay4skill-2024.firebasestorage.app",
+            messagingSenderId: "63697979694",
+            appId: "1:63697979694:web:111dfbc1e04c10d26f52bf",
+            measurementId: "G-D5DLX7J85H"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Show login button initially
+        let isLoggedIn = false;
+
+        document.getElementById('loginButton').addEventListener('click', function() {
+            const provider = new GoogleAuthProvider();
+
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    alert("Login successful! Welcome " + user.displayName);
+                    isLoggedIn = true;
+                    
+                    // Populate user's name after login
+                    document.getElementById('userName').textContent = "Welcome, " + user.displayName;
+                    
+                    // Show the upload resume section
+                    document.getElementById('uploadSection').style.display = 'block';
+                    document.getElementById('loginSection').style.display = 'none';
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    console.error("Error during Google Sign-In: ", errorMessage);
+                });
+        });
+    </script>
+
+    <style>
+        /* Body and overall layout */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        /* Left Section (Pay4Skill Logo & Subtitle) */
+        .left {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Right Section (Login or Upload Resume) */
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .header {
+            font-size: 50px; /* Increased font size */
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .subtitle {
+            font-size: 24px; /* Increased font size */
+            color: #666;
+        }
+
+        /* Styling for Google Login Button */
+        .google-btn {
+            padding: 10px 20px;
+            background-color: #4386f5; /* Changed to blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        /* Styling for Upload Form */
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        /* Error message styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        /* Vertical line separator */
+        .vl {
+            border-left: 6px solid #4CAF50;
+            height: 600px;
+        }
+
+        .container > .left,
+        .container > .right {
+            padding: 20px;
+        }
+
+        /* User name styling */
+        .user-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section for Pay4Skill Logo & Subtitle -->
+        <div class="left">
+            <div class="header">Pay4Skill</div>
+            <div class="subtitle">Gen-AI Powered Hiring Platform</div>
+        </div>
+
+        <!-- Vertical Line -->
+        <div class="vl"></div>
+
+        <!-- Right Section for Login/Upload -->
+        <div id="loginSection" class="right">
+            <h1>Login with Google</h1>
+            
+            <button id="loginButton" class="google-btn">
+                                <img src="data:image/jpeg;base64,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" alt="Google Icon">
+
+                Login with Google
+            </button>
+        </div>
+
+        <!-- Upload Section (Visible only after login) -->
+        <div id="uploadSection" class="right" style="display: none;">
+            <div class="user-name" id="userName"></div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+                </br></br></br></br>                </br></br></br></br>
+            </br>
+            <h1>Upload Resume to Analyse</h1>
+            <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Analyse</button>
+            </form>
+        </div>
+     
+    </div>
+</body>
+</html>
