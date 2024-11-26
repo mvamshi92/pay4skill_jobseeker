@@ -17,7 +17,7 @@ service_account_path = "service_account.json"  # Replace with your service accou
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = service_account_path
 
 # Set up the Gemini API key
-genai.configure(api_key="AIzaSyAfkQBdixIFN0F1yN5px-WftmsEyP2m-wA")  # Replace with your Gemini API key
+genai.configure(api_key="GEMINI_API")  # Replace with your Gemini API key
 
 # Function to check allowed file extensions
 def allowed_file(filename):
@@ -89,7 +89,7 @@ def upload_file():
     file.save(local_file_path)
 
     # Upload the file to Google Cloud Storage
-    bucket_name = "pay4skills_res"  # Replace with your GCS bucket name
+    bucket_name = "GSS_BUCKET"  # Replace with your GCS bucket name
     destination_blob_name = file.filename
     public_url = upload_to_gcs(local_file_path, bucket_name, destination_blob_name)
     
@@ -125,7 +125,7 @@ def upload_file():
                     "  \"resumeurl\": \"<PUBLIC_URL>\",\n"
                     "  \"overallExperience\": 8,\n"
                     "  \"location\": \"hyderabad\",\n"
-                    "  \"email\": \"mvamshi@gmail.com\",\n"
+                    "  \"email\": \"TEST@gmail.com\",\n"
                     "  \"phone\": \"1234521\",\n"
                     "  \"name\": \"vamsi\",\n"
                     "  \"skills\": [\n"
